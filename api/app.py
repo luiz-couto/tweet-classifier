@@ -26,11 +26,15 @@ def isAmerican():
     predicted = predict(text)
     
     response = app.response_class(
-        response=json.dumps({ "isAmerican": predicted }),
+        response=json.dumps({ 
+            "isAmerican": predicted,
+            "version": "",
+            "model_date": "",
+
+        }),
         status=200,
         mimetype='application/json'
     )
 
     return response
 
-app.run(host='0.0.0.0', port=PORT)
