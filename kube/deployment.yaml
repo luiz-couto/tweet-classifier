@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tweet-classifier
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: tweet-classifier
+  template:
+    metadata:
+      labels:
+        app: tweet-classifier
+    spec:
+      containers:
+      - name: tweet-classifier
+        image: ghcr.io/luiz-couto/is-american:v0.0.1
+        ports:
+        - containerPort: 5021
