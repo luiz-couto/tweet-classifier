@@ -1,17 +1,9 @@
 import pandas as pd
 import numpy as np
+import pickle
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import Pipeline
-
-def extractFeatures(text):
-    count_vect = CountVectorizer()
-    tfidf_transformer = TfidfTransformer()
-    X_new_counts = count_vect.fit_transform(["text"])
-    X_new_tfidf = tfidf_transformer.transform(X_new_counts)
-    return X_new_tfidf
-
-
 
 def main():
     training = pd.read_csv("../datasets/training.csv", sep=";", usecols=["text", "country_code"])
@@ -33,7 +25,11 @@ def main():
 
     text_clf.fit(tweets, targets)
 
+    pickle.dump(text_clf, open("clf.p", "wb" ))
+
     # Now begins the performance test
+
+    clf = pickle.load(open("clf.p", "rb" ))
 
     test = pd.read_csv("../datasets/test.csv", sep=";", usecols=["text", "country_code"])
     test_tweets = []
@@ -45,7 +41,7 @@ def main():
         else:
             expected.append(0)
     
-    predicted = text_clf.predict(test_tweets)
+    predicted = clf.predict(test_tweets)
     acc = np.mean(predicted == expected)
     print(acc)
 
