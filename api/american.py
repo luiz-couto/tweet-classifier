@@ -3,6 +3,8 @@ from flask import request
 import json
 import pickle
 
+PORT = 5021
+
 app = Flask(__name__)
 
 def predict(text):
@@ -31,4 +33,4 @@ def isAmerican():
 
     return response
 
-app.run(host='0.0.0.0', port=8090)
+app.run(host='0.0.0.0', port=PORT)
