@@ -29,7 +29,7 @@ cluster_ip=$(kubectl get svc tweet-classifier-service -ojsonpath='{.spec.cluster
 
 echo "[INFO] Found tweet-classifier-service at $cluster_ip"
 echo ""
-wget --server-response --output-document response.json --header='Content-Type: application/json' --post-data '{"text":' "\"${text}\""'}' http://${cluster_ip}:5021/api/american &> /dev/null
+wget --server-response --output-document response.json --header='Content-Type: application/json' --post-data "{\"text\": \"${text}\"}" http://${cluster_ip}:5021/api/american &> /dev/null
 
 echo "RESPONSE:"
 python -m json.tool response.json
