@@ -25,8 +25,11 @@ then
 fi
 
 # Begin script in case all parameters are correct
-echo "$text"
-
 cluster_ip=$(kubectl get svc tweet-classifier-service -ojsonpath='{.spec.clusterIP}')
 
-echo "$cluster_ip"
+echo "[INFO] Found tweet-classifier-service at $cluster_ip"
+echo ""
+wget --server-response --output-document response.json --header='Content-Type: application/json' --post-data '{"text": "#covid19 new york"}' http://${cluster_ip}:5021/api/american &> /dev/null
+
+echo "RESPONSE:"
+python -m json.tool response.json
