@@ -1,14 +1,21 @@
 from flask import Flask
 from flask import request
+import os
 import json
 import pickle
+import requests
 
 PORT = 5021
 
+model_version = os.environ.get('MODEL_VERSION')
 app = Flask(__name__)
 
 def predict(text):
-    clf = pickle.load(open("clf.p", "rb" ))
+    url = "https://raw.github.com/luiz-couto/tweet-classifier/master/models" + model_version
+    req = requests.get(url)
+    open(model_version,'wb').write(req.content)
+
+    clf = pickle.load(open(model_version, "rb" ))
     predicted = clf.predict([text])
     return int(predicted[0])
 
@@ -19,6 +26,7 @@ def isAmerican():
         print("missing JSON header")
         return app.response_class(status=400)
     
+    print("MODEL_VERSION:", model_version)
 
     content = request.get_json()
     text = content["text"]
