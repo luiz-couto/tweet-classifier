@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: tweet-classifier
-        image: ghcr.io/luiz-couto/is-american:v0.0.1
+        image: ghcr.io/luiz-couto/is-american:v0.0.3
         ports:
         - containerPort: 5021
