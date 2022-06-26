@@ -1,0 +1,174 @@
+metadata:
+  creationTimestamp: "2022-06-24T16:46:23Z"
+  generation: 966
+  managedFields:
+  - apiVersion: argoproj.io/v1alpha1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:spec:
+        .: {}
+        f:destination:
+          .: {}
+          f:namespace: {}
+          f:server: {}
+        f:project: {}
+        f:source:
+          .: {}
+          f:path: {}
+          f:repoURL: {}
+        f:syncPolicy:
+          .: {}
+          f:automated: {}
+      f:status:
+        .: {}
+        f:health:
+          .: {}
+          f:status: {}
+        f:history: {}
+        f:operationState:
+          .: {}
+          f:finishedAt: {}
+          f:message: {}
+          f:operation:
+            .: {}
+            f:initiatedBy:
+              .: {}
+              f:automated: {}
+            f:retry:
+              .: {}
+              f:limit: {}
+            f:sync:
+              .: {}
+              f:revision: {}
+          f:phase: {}
+          f:startedAt: {}
+          f:syncResult:
+            .: {}
+            f:resources: {}
+            f:revision: {}
+            f:source:
+              .: {}
+              f:path: {}
+              f:repoURL: {}
+        f:reconciledAt: {}
+        f:resources: {}
+        f:sourceType: {}
+        f:summary:
+          .: {}
+          f:images: {}
+        f:sync:
+          .: {}
+          f:comparedTo:
+            .: {}
+            f:destination:
+              .: {}
+              f:namespace: {}
+              f:server: {}
+            f:source:
+              .: {}
+              f:path: {}
+              f:repoURL: {}
+          f:revision: {}
+          f:status: {}
+    manager: Go-http-client
+    operation: Update
+    time: "2022-06-26T03:14:25Z"
+  name: tweet-classifier
+  namespace: argocd
+  resourceVersion: "3591828"
+  uid: 2e38d6fa-9f66-4b9e-bae8-373d2547955a
+spec:
+  destination:
+    namespace: luizcouto
+    server: https://kubernetes.default.svc
+  project: luizcouto-project
+  source:
+    path: kube/
+    repoURL: https://github.com/luiz-couto/tweet-classifier
+  syncPolicy:
+    automated: {}
+status:
+  health:
+    status: Healthy
+  history:
+  - deployStartedAt: "2022-06-24T16:46:23Z"
+    deployedAt: "2022-06-24T16:46:27Z"
+    id: 0
+    revision: 48ca7e88d82830b8b686c8a0ff02fe236af3f50a
+    source:
+      path: kube/
+      repoURL: https://github.com/luiz-couto/tweet-classifier
+  - deployStartedAt: "2022-06-26T03:14:21Z"
+    deployedAt: "2022-06-26T03:14:25Z"
+    id: 1
+    revision: c50c73e61772db4ca74d8e9dd769e3a0fa614fc8
+    source:
+      path: kube/
+      repoURL: https://github.com/luiz-couto/tweet-classifier
+  operationState:
+    finishedAt: "2022-06-26T03:14:25Z"
+    message: successfully synced (all tasks run)
+    operation:
+      initiatedBy:
+        automated: true
+      retry:
+        limit: 5
+      sync:
+        revision: c50c73e61772db4ca74d8e9dd769e3a0fa614fc8
+    phase: Succeeded
+    startedAt: "2022-06-26T03:14:21Z"
+    syncResult:
+      resources:
+      - group: ""
+        hookPhase: Running
+        kind: Service
+        message: service/tweet-classifier-service unchanged
+        name: tweet-classifier-service
+        namespace: luizcouto
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: apps
+        hookPhase: Running
+        kind: Deployment
+        message: deployment.apps/tweet-classifier configured
+        name: tweet-classifier
+        namespace: luizcouto
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      revision: c50c73e61772db4ca74d8e9dd769e3a0fa614fc8
+      source:
+        path: kube/
+        repoURL: https://github.com/luiz-couto/tweet-classifier
+  reconciledAt: "2022-06-26T15:59:18Z"
+  resources:
+  - health:
+      status: Healthy
+    kind: Service
+    name: tweet-classifier-service
+    namespace: luizcouto
+    status: Synced
+    version: v1
+  - group: apps
+    health:
+      status: Healthy
+    kind: Deployment
+    name: tweet-classifier
+    namespace: luizcouto
+    status: Synced
+    version: v1
+  sourceType: Directory
+  summary:
+    images:
+    - ghcr.io/luiz-couto/is-american:v0.0.3
+  sync:
+    comparedTo:
+      destination:
+        namespace: luizcouto
+        server: https://kubernetes.default.svc
+      source:
+        path: kube/
+        repoURL: https://github.com/luiz-couto/tweet-classifier
+    revision: c50c73e61772db4ca74d8e9dd769e3a0fa614fc8
+    status: Synced
