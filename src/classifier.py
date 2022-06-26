@@ -1,9 +1,12 @@
+from datetime import datetime
 import pandas as pd
 import numpy as np
 import pickle
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import Pipeline
+
+VERSION = "v0.0.2"
 
 def main():
     training = pd.read_csv("../datasets/training.csv", sep=";", usecols=["text", "country_code"])
@@ -25,11 +28,15 @@ def main():
 
     text_clf.fit(tweets, targets)
 
-    pickle.dump(text_clf, open("clf.p", "wb" ))
+    data = { 'model': text_clf, 'model_date': datetime.now().timestamp() }
+
+    pickle.dump(data, open(VERSION, "wb" ))
 
     # Now begins the performance test
 
-    clf = pickle.load(open("clf.p", "rb" ))
+    data = pickle.load(open(VERSION, "rb" ))
+
+    clf = data["model"]
 
     test = pd.read_csv("../datasets/test.csv", sep=";", usecols=["text", "country_code"])
     test_tweets = []
